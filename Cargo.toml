@@ -1,0 +1,7 @@
+[package]
+name = "zlite"
+version = "0.1.0"
+authors = ["Ningzhou Zeng <nxz84@case.edu>"]
+edition = "2018"
+
+[dependencies]
