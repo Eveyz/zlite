@@ -1,37 +1,37 @@
-use std::io::{self, Read};
+use std::io::{self, Write, BufRead};
+use std::process;
+
+// cargo watch -x run
 
 struct InputBufferT {
 	buffer: String,
-	buffer_length: usize,
-	input_lenth: isize,
+	// buffer_length: usize,
+	// input_lenth: isize,
 }
 type InputBuffer = InputBufferT;
 
 impl InputBuffer {
 	fn new_input_buffer() -> InputBuffer {
-		return InputBuffer { buffer: String::new(), buffer_length: 0, input_lenth: 0 };
+		return InputBuffer { buffer: String::new() };
 	}
 }
 
 fn print_prompt() {
-	println!("zlite > ");
-}
-
-fn read_input(input_buffer: &mut InputBuffer) -> io::Result<()> {
-	io::stdin().read_to_string(&mut input_buffer.buffer)?;
-	return Ok(());
+	print!("zlite > ");
+	io::stdout().flush().unwrap();
 }
 
 fn main() {
 	let mut input_buffer = InputBuffer::new_input_buffer();
 	loop {
 		print_prompt();
-		read_input(&mut input_buffer);
-
-		if input_buffer.buffer == ".exit" {
-			break;
+		input_buffer.buffer = io::stdin().lock().lines().next().unwrap().unwrap();
+	
+		if input_buffer.buffer.trim() == ".exit" {
+			println!("Thanks for using zlite.");
+			process::exit(0);
 		} else {
-			println!("Input {:?}", input_buffer.buffer);
+			println!("input {:?}", input_buffer.buffer);
 		}
 	}
 }
