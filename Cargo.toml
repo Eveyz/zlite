@@ -5,3 +5,4 @@ authors = ["Ningzhou Zeng <nxz84@case.edu>"]
 edition = "2018"
 
 [dependencies]
+scan_fmt = "0.2.2"
